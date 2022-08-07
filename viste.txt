@@ -1,0 +1,20 @@
+CREATE VIEW prodottiDisponibili AS
+SELECT Nome, Giorno, Prezzo as 'Prezzo (Euro)', Quantità as 'Quantità (Kg)'
+FROM ProdottoIttico
+WHERE Ordine is null;
+SELECT * from prodottiDisponibili;
+
+CREATE VIEW acquirentiDisponibili AS
+SELECT Nome, Tipo, PartitaIVA
+FROM Acquirente;
+
+CREATE VIEW anagraficaDipendenti AS
+SELECT Cognome, Nome, Età, Ruolo, CodiceFiscale
+FROM Dipendente
+order by Cognome;
+
+CREATE VIEW prezzoAlGiorno AS
+SELECT sum(Prezzo) as ilPrezzo, CAST(Giorno AS DATE) as laData
+FROM Ordine
+group by CAST(Giorno AS DATE);
+

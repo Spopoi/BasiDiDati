@@ -1,0 +1,124 @@
+INSERT INTO Dipendente
+VALUES ('GVNDGT78D12L826K', 'Giovanna', 'Digotto',
+'46', 'Amministrativo', 1400.12)
+
+INSERT INTO Dipendente
+VALUES ('ADRGZL78D88L811J', 'Andrea', 'Gonzello',
+'28', 'Amministrativo', 1204.98)
+
+INSERT INTO Dipendente
+VALUES ('TMSFNS33G36L123K', 'Tommaso', 'Fondoso',
+'33', 'Addetto vendita', 804.7)
+
+INSERT INTO Dipendente
+VALUES ('GDAZCC26F34L956K', 'Giada', 'Zecca',
+'56', 'Addetto vendita', 1104.7)
+
+INSERT INTO Dipendente
+VALUES ('ERNATL55G32K367J', 'Enrico', 'Aitosolo',
+'37', 'Addetto carico/scarico merci', 706)
+
+INSERT INTO Dipendente
+VALUES ('DVDSVR29L39L567J', 'Davide', 'Severone',
+'45', 'Addetto carico/scarico merci', 866)
+
+INSERT INTO Acquirente
+VALUES ('00273849267', 'Falconer Alberto e C. SRL', 'Via Enrico Fonda 77',
+'Pescheria')
+
+INSERT INTO Acquirente
+VALUES ('00782936738', 'FISH ACCADEMY S.R.L', 'Via Carducci 37',
+'Pescheria')
+
+INSERT INTO Acquirente
+VALUES ('00928394726', 'Friulpesca S.R.L', 'Via Trieste 66',
+'Pescheria')
+
+INSERT INTO Acquirente
+VALUES ('00273283746', 'Stella di Mare', 'Via Traiano 12',
+'Ristorante')
+
+INSERT INTO Veterinario
+VALUES ('00839993847', 'Francesca Lomenta', 450.2)
+
+INSERT INTO Veterinario
+VALUES (‘00283948273’, 'Jesus Catalan’, 1300.27) 
+  
+INSERT INTO PartitaIva
+VALUES ('00283948273', 'AA9/11')
+
+INSERT INTO PartitaIva
+VALUES ('00839993847', 'AA9/11')
+
+INSERT INTO PartitaIva
+VALUES ('00273849267', 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00782936738', 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00928394726', 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00273283746', 'AA7/10')
+
+INSERT INTO Fornitore
+VALUES (null, 'Cooperativa Pescactori Giuliani', 'via Padova 13', '00839283940', 'Armatore' , 'AAH98L23' )
+
+INSERT INTO Fornitore
+VALUES (null, 'Cooperativa Pescactori Giuliani', 'via Padova 13', '00839283940', 'Armatore' , 'JK88G533' )
+
+INSERT INTO Fornitore
+VALUES (null, 'Valle Cazuluani', 'via Ritolli 3', '00999283712', 'Allevamento' , null )
+
+INSERT INTO Fornitore
+VALUES (null, 'Cooperativa pescatori Megaride', 'via Potuilli 99', '00283948371', 'Armatore' , 'AAJSJS82' )
+
+INSERT INTO Fornitore
+VALUES (null, 'Cooperativa Limena', 'via Gianni 49', '00892837463', 'Stabilimento Ittico' , null )
+
+INSERT INTO PartitaIva
+VALUES (‘00839283940’, 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00999283712', 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00283948371', 'AA7/10')
+
+INSERT INTO PartitaIva
+VALUES ('00892837463', 'AA7/10')
+
+INSERT INTO Ordine
+VALUES (null, 250.4 , null , 'ADRGZL78D88L811J', '00928394726' , 'GDAZCC26F34L956K' )
+
+INSERT INTO Ordine
+VALUES (null, 138 , '2020-2-2 11:34:10' , 'GVNDGT78D12L826K', '00782936738' , 'TMSFNS33G36L123K' )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Sparus Aurata', 2 , 1 ,
+'00839993847', '2020-03-12', 'Rete','Pola',  81 , 18, true)
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Polpo', 4 , 1 ,
+'00839993847', '2020-03-12', 'Nassa','FAO 37.2.1',  39.2 , 22.1, true )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Palombo', 1 , 2 ,
+'00283948273', '2020-02-27', 'Rete da posta','FAO 37.2.1',  36 , 6, true )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Gambero rosa', 3 , null ,
+'00283948273', '2020-04-3', 'Rete da posta','FAO 33.5.1',  45 , 23, true )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Rombo chiodato', 1 , null ,
+'00283948273', '2020-02-3', 'Nassa','FAO 12.5.4',  65 , 32, true )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Cefalo latregano', 4 , null ,
+'00283948273', '2020-02-3', 'Rete da posta','FAO 36.1.1',  40 , 12, true )
+
+INSERT INTO ProdottoIttico
+VALUES (null, 'Cefalo latregano', 2 , null ,
+'00283948273', '2020-01-3', 'Rete da posta','FAO 36.1.1',  20 , 6, false )

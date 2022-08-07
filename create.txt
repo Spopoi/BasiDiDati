@@ -1,0 +1,44 @@
+-create table PartitaIva( Numero varchar(11) primary key,
+			 Modello varchar(6));
+
+-create table Fornitore( Codice int primary key AUTO_INCREMENT,
+                    	Nome varchar(45) not null,
+                    	Sede varchar(45) ,
+                    	PartitaIVA varchar(11) not null references PartitaIva(numero) ,
+                    	Tipo varchar(45) not null,
+                    	Licenza varchar(30) );
+
+-create table Veterinario( PartitaIVA varchar(11) primary key references PartitaIVA(numero),
+   				Nome varchar(45) not null,
+                        	compenso float not null);
+
+-create table Acquirente( PartitaIVA varchar(11) primary key references PartitaIVA(numero),
+   			  Nome varchar(45) not null,
+   			  Sede varchar(45),
+                          Tipo varchar(45) not null);
+
+-create table Dipendente( CodiceFiscale varchar(16) primary key,
+   				Nome varchar(45) not null,
+                        	Cognome varchar(45) not null,
+                        	Età int,
+                        	Ruolo varchar(45) not null,
+                        	Stipendio float );
+
+-create table Ordine( Codice int primary key AUTO_INCREMENT,
+   			Prezzo float not null,
+                    	Giorno datetime,
+                    	Amministrativo varchar(16) references Dipendente(CodiceFiscale),
+                    	Acquirente varchar(11) references Acquirente(PartitaIVA),
+                    	Venditore varchar(16) references Dipendente(CodiceFiscale));
+
+-create table ProdottoIttico(Codice int primary key AUTO_INCREMENT,
+   				Nome varchar(45) not null,
+                        	Fornitore int references Fornitore(codice),
+                        	Ordine int references Ordine(codice),
+                        	Veterinario varchar(11) references Veterinario(PartitaIVA),
+                        	Giorno date not null,
+                        	Attrezzo varchar(45),
+                        	Zona varchar(45),
+                        	Prezzo float,
+                        	Quantità float not null,
+                        	HACCP bool);

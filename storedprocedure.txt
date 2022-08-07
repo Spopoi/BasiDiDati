@@ -1,0 +1,61 @@
+delimiter &&
+CREATE PROCEDURE aggiungiOrdine(in Prodotto int ,in Quantità float , in Acquirente varchar(11) ,
+                        	in Prezzo float ,in Giorno datetime , in Venditore varchar(16), in Amministrativo varchar(16))
+BEGIN
+	DECLARE CUSTOM_EXCEPTION CONDITION FOR SQLSTATE '45000';
+    
+	IF (Prezzo<0 OR Quantità<0 OR
+    	(select ProdottoIttico.Quantità from ProdottoIttico where ProdottoIttico.Codice = Prodotto) < Quantità OR
+    	(select ProdottoIttico.Ordine from ProdottoIttico where ProdottoIttico.Codice = Prodotto) is not null) THEN 	 
+	SIGNAL CUSTOM_EXCEPTION
+	SET MESSAGE_TEXT = 'Prezzo/quantità non validi';
+	END IF;
+    
+	INSERT INTO Ordine
+	VALUES (null, Prezzo , Giorno  , Amministrativo , Acquirente , Venditore );
+ 
+	IF ((select ProdottoIttico.Quantità from ProdottoIttico where ProdottoIttico.Codice = Prodotto) - Quantità > 0) THEN
+    
+	-- duplico la riga -> Prodotto Ittico residuo
+	INSERT INTO ProdottoIttico (Nome,  Fornitore, Ordine , Veterinario, Giorno ,Attrezzo ,Zona ,Prezzo ,Quantità ,HACCP )
+	SELECT Nome,  Fornitore, Ordine , Veterinario, Giorno ,Attrezzo ,Zona ,
+    	(select ProdottoIttico.Prezzo from ProdottoIttico where ProdottoIttico.Codice = Prodotto)-Prezzo ,
+    	(select ProdottoIttico.Quantità from ProdottoIttico where ProdottoIttico.Codice = Prodotto) - Quantità ,
+    	HACCP
+	FROM ProdottoIttico WHERE ProdottoIttico.Codice = Prodotto;
+    
+   --  ProdottoIttico.Quantità = ( ProdottoIttico.Quantità - Quantità)
+	END IF;
+    
+	UPDATE ProdottoIttico
+	SET ProdottoIttico.Ordine = ( SELECT max(Ordine.Codice) from Ordine),
+	ProdottoIttico.Prezzo = Prezzo,
+	ProdottoIttico.Quantità = Quantità
+	WHERE ProdottoIttico.Codice = Prodotto;
+    
+END &&
+delimiter ;
+
+
+delimiter &&
+CREATE PROCEDURE venditeDelGiorno(in giorno date , out totale float)
+BEGIN
+    
+	set totale = (select ilPrezzo from prezzoAlGiorno where laData = giorno);
+    
+END &&
+delimiter ;
+
+
+delimiter &&
+CREATE PROCEDURE estrattoConto(out totale float)
+BEGIN
+    
+    set @guadagni = (select sum(Prezzo) from Ordine);
+	set @spese = (select sum(Prezzo) from ProdottoIttico) +
+   			 (select sum(Stipendio) from Dipendente) +
+            	(select sum(compenso) from Veterinario);
+    set totale = @guadagni - @spese;
+    
+END &&
+delimiter ;
