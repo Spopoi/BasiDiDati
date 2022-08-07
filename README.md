@@ -1,4 +1,4 @@
-# BasiDiDati
+# FishMarketCommisioner-Database
 M.Eng. | Database design for a fish market commissioner.
 
 The aim of the project is to design a database for a fish market commissioner using MySql.
